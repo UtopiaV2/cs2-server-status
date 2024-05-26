@@ -22,15 +22,15 @@ public class Config : BasePluginConfig {
         {"de_vertigo","https://developer.valvesoftware.com/w/images/d/d5/De_vertigo.png"},
         {"lobby_mapveto","https://developer.valvesoftware.com/w/images/c/c5/Lobby_mapveto.png"},
     };
-    [JsonPropertyName("Embeds")] public Dictionary<string, Embed> Embeds {get; set;} = new Dictionary<string, Embed>{
-        {"map_change", new Embed{
+    [JsonPropertyName("Embeds")] public Dictionary<string, Embed> Embeds {get; set;} = new Dictionary<string, Embed> {
+        { "map_change", new Embed {
             title = "Map Change",
             color = 0x58b9ff,
             description = "Map have changed!",
-            image = new EmbedImage{
+            image = new EmbedImage {
                 url = "map_image"
             },
-            thumbnail = new EmbedImage{
+            thumbnail = new EmbedImage {
                 url = "thumbnail"
             },
             footer = new EmbedFooter{
@@ -42,6 +42,11 @@ public class Config : BasePluginConfig {
                     name = "Map",
                     value = "{0}",
                     inline = true
+                },
+                new EmbedField{
+                    name = "Players",
+                    value = "{0}/{1}",
+                    inline = true
                 }
             ],
         }}
@@ -49,7 +54,7 @@ public class Config : BasePluginConfig {
 }
 
 public class DcEmbed {
-    public string username {get; set;} = "afgán";
+    public string username {get; set;} = "Status Update!";
     public Embed[] embeds = [];
 }
 
