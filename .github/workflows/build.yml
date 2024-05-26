@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '8.x' # Specify your .NET version here
+        dotnet-version: '8.x'
 
     - name: Restore dependencies
       run: dotnet restore
@@ -34,12 +34,10 @@ jobs:
       id: create_release
       if: startsWith(github.ref, 'refs/tags/')
       uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Release Build"
-          files: |
-            cs2-server-status-*.tar.gz
-
-
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: false
+        title: "Release Build"
+        files: |
+          cs2-server-status-*.tar.gz
