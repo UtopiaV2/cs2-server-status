@@ -28,7 +28,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Compress project
-      run: tar cvf cs2-server-status-${git rev-parse --short HEAD}.tar.gz bin/Release/net8.0/
+      run: tar cvf cs2-server-status-${git rev-parse --short HEAD}.tar.gz bin/Release/net8.0
 
     - name: Create GitHub Release
       id: create_release
