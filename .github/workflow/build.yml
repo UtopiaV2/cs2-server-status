@@ -1,0 +1,45 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.x' # Specify your .NET version here
+
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Test project
+      run: dotnet test --no-build --verbosity normal
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Compress project
+      run: tar cvf cs2-server-status-${git rev-parse --short HEAD}.tar.gz bin/Release/net8.0/
+
+    - name: Create GitHub Release
+      id: create_release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Release Build"
+          files: |
+            cs2-server-status-*.tar.gz
+
+
