@@ -21,7 +21,7 @@ public class Cs2ServerStatus : BasePlugin, IPluginConfig<Config> {
         RegisterListener<Listeners.OnMapStart>(map => {
             var OgSection = Config.Embeds["map_change"];
             Config.Embeds["map_change"].fields[0].value = string.Format(Config.Embeds["map_change"].fields[0].value, map);
-            Config.Embeds["map_change"].fields[1].value = string.Format(Config.Embeds["map_change"].fields[1].value, Utilities.GetPlayers().Count ,Server.MaxPlayers);
+            Config.Embeds["map_change"].fields[1].value = string.Format(Config.Embeds["map_change"].fields[1].value, Utilities.GetPlayers().Count, Server.MaxPlayers);
             Config.Embeds["map_change"].image = new EmbedImage{ url = Config.MapImages[map]};
             var embed = new DcEmbed{
                 username = Config.WebHookName,
